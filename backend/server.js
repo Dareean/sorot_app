@@ -1,92 +1,122 @@
+// server.js — Kode Final dan Terverifikasi
 const express = require('express');
-const cors = require('cors');
 const multer = require('multer');
+const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
+const admin = require('firebase-admin');
 
+// Pastikan nama file ini sama persis dengan file kunci Anda
+const serviceAccount = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
 const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Static folder untuk file upload
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
-// Konfigurasi multer (simpan ke folder uploads/)
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+  destination: (_, __, cb) => cb(null, UPLOAD_DIR),
+  filename: (_, file, cb) => {
+    const ext = (path.extname(file.originalname || '') || '.jpg').toLowerCase();
+    const name = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+    cb(null, name);
   }
 });
-const upload = multer({ storage });
 
-let laporanList = [];
+const ALLOWED = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/gif', 'application/octet-stream']);
 
-// Endpoint buat kirim laporan
-app.post('/api/laporan', upload.single('photo'), (req, res) => {
-  try {
-    const { title, description, category, latitude, longitude } = req.body;
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (_, file, cb) => {
+    const ok = ALLOWED.has((file.mimetype || '').toLowerCase());
+    if (!ok) return cb(new Error('Only image files are allowed'), false);
+    cb(null, true);
+  }
+}).single('file');
 
-    const laporanData = {
-      id: `RPT-${Date.now()}`,
-      title,
-      description,
-      category,
-      location: { latitude, longitude },
-      status: "Diterima",
-      catatan: null,
-      imageUrl: req.file ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}` : null,
-      timestamp: new Date().toISOString()
-    };
+app.use('/uploads', express.static(UPLOAD_DIR));
 
-    laporanList.push(laporanData);
+app.post('/upload', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error('Upload error:', err.message);
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    if (!req.file) return res.status(400).json({ error: 'No file' });
 
-    res.status(200).json({
-      status: 'sukses',
-      message: 'Laporan berhasil diterima',
-      data: laporanData
+    console.log('Uploaded:', {
+      original: req.file.originalname,
+      mimetype: req.file.mimetype,
+      size: req.file.size
     });
-
-  } catch (error) {
-    res.status(500).json({ status: 'error', message: error.message });
-  }
-});
-
-// GET semua laporan
-app.get('/api/laporan', (req, res) => {
-  res.json(laporanList);
-});
-
-// Update status laporan
-app.put('/api/laporan/:id', (req, res) => {
-  const { id } = req.params;
-  const { status, catatan } = req.body;
-
-  const laporan = laporanList.find(l => l.id === id);
-  if (!laporan) {
-    return res.status(404).json({ status: 'error', message: 'Laporan tidak ditemukan' });
-  }
-
-  laporan.status = status || laporan.status;
-  laporan.catatan = catatan || laporan.catatan;
-
-  res.json({
-    status: 'sukses',
-    message: 'Status laporan diperbarui',
-    data: laporan
+    
+    const localIp = getLocalIp();
+    const port = process.env.PORT || 5001;
+    const url = `http://${localIp}:${port}/uploads/${req.file.filename}`;
+    res.json({ url });
   });
 });
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
+app.get("/reports.geojson", async (req, res) => {
+  try {
+    const snapshot = await db.collection("reports").get();
+    
+    const features = [];
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      
+      if (typeof data.lat === 'number' && typeof data.lng === 'number') {
+        features.push({
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [data.lng, data.lat],
+          },
+          properties: {
+            id: doc.id,
+            title: data.title || "Tanpa Judul",
+            desc: data.desc || "-",
+            photoUrl: data.photoUrl || null,
+            status: data.status || "pending",
+            category: data.category || "-",
+          },
+        });
+      }
+    });
+
+    res.json({
+      type: "FeatureCollection",
+      features: features,
+    });
+  } catch (error) {
+    console.error("Gagal mengambil data untuk GeoJSON:", error);
+    res.status(500).json({ error: "Tidak dapat memproses permintaan." });
+  }
 });
 
-// Jalankan server
-app.listen(PORT, () => {
-  console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5001;
+
+function getLocalIp() {
+  const nets = os.networkInterfaces();
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+      if (net.family === 'IPv4' && !net.internal) {
+        return net.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server berjalan di http://${getLocalIp()}:${PORT}`);
 });
