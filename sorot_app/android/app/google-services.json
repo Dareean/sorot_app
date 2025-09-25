@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "647800295624",
+    "project_id": "sorot-app-13097",
+    "storage_bucket": "sorot-app-13097.appspot.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647800295624:android:5f1922d6d7263bd36f95fd",
+        "android_client_info": {
+          "package_name": "com.example.sorot_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFrfkA9tKZOojbIgFbzAVGt_MWLmn71-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647800295624:android:aecf224967f44bcd6f95fd",
+        "android_client_info": {
+          "package_name": "id.sorot.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFrfkA9tKZOojbIgFbzAVGt_MWLmn71-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
