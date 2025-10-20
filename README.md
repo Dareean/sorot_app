@@ -18,8 +18,6 @@
 - [Cara Menjalankan](#-cara-menjalankan)
 - [Struktur Project](#-struktur-project)
 - [API Documentation](#-api-documentation)
-- [Berkontribusi](#-berkontribusi)
-- [Lisensi](#-lisensi)
 
 ## 🚀 Fitur Utama
 
@@ -53,7 +51,7 @@ graph TB
     style C fill:#FFA000,color:#fff
     style D fill:#339933,color:#fff
     style F fill:#589632,color:#fff
-💻 Teknologi
+## 💻 Teknologi
 Frontend Mobile:
 
 Flutter 3.19.5
@@ -86,7 +84,7 @@ QGIS 3.34+
 
 GeoJSON API
 
-📋 Prerequisites
+##📋 Prerequisites
 Sebelum instalasi, pastikan software berikut terinstal:
 
 Flutter SDK (versi 3.19.5 atau lebih baru)
@@ -101,7 +99,7 @@ QGIS (hanya untuk admin GIS)
 
 Akun Firebase
 
-⚙️ Instalasi & Setup
+## ⚙️ Instalasi & Setup
 1. Clone Repository
 git clone https://github.com/your-organization/sorot.git
 cd sorot
@@ -173,7 +171,7 @@ Masukkan URL endpoint: http://localhost:3000/api/reports/geojson
 
 Set refresh interval: Layer Properties > Temporal > Enable Temporal
 
-🎯 Cara Menjalankan
+## 🎯 Cara Menjalankan
 Development Mode
 1. Jalankan Backend Server:
 cd backend-server
@@ -198,7 +196,7 @@ cd backend-server
 npm run build
 npm start
 
-📁 Struktur Project
+## 📁 Struktur Project
 text
 sorot/
 ├── 📱 mobile-app/                 # Aplikasi Flutter
@@ -226,7 +224,7 @@ sorot/
 │   └── package.json
 └── 📚 documentation/             # Dokumentasi tambahan
 
-📡 API Documentation
+## 📡 API Documentation
 Endpoints Utama
 Method	Endpoint	Deskripsi
 GET	/api/reports	Ambil semua laporan
