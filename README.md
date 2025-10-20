@@ -103,10 +103,9 @@ Akun Firebase
 
 ⚙️ Instalasi & Setup
 1. Clone Repository
-bash
 git clone https://github.com/your-organization/sorot.git
 cd sorot
-2. Setup Firebase Project
+2. Setup Firebase Project:
 Buka Firebase Console
 
 Buat project baru sorot-app
@@ -177,33 +176,28 @@ Set refresh interval: Layer Properties > Temporal > Enable Temporal
 🎯 Cara Menjalankan
 Development Mode
 1. Jalankan Backend Server:
-
-bash
 cd backend-server
 npm run dev
-2. Jalankan Aplikasi Flutter:
 
-bash
+2. Jalankan Aplikasi Flutter:
 cd mobile-app
 flutter run
-3. Jalankan Admin Dashboard:
 
-bash
+3. Jalankan Admin Dashboard:
 cd admin-dashboard
 npm start
 Production Build
-Build Aplikasi Flutter:
 
-bash
+4. Build Aplikasi Flutter:
 cd mobile-app
 flutter build apk --release
 flutter build ios --release
-Build Backend untuk Production:
 
-bash
+5. Build Backend untuk Production:
 cd backend-server
 npm run build
 npm start
+
 📁 Struktur Project
 text
 sorot/
@@ -231,6 +225,7 @@ sorot/
 │   │   └── services/             # API calls
 │   └── package.json
 └── 📚 documentation/             # Dokumentasi tambahan
+
 📡 API Documentation
 Endpoints Utama
 Method	Endpoint	Deskripsi
@@ -239,11 +234,11 @@ GET	/api/reports/geojson	Data laporan format GeoJSON
 POST	/api/reports	Buat laporan baru
 PUT	/api/reports/:id	Update status laporan
 POST	/api/upload	Upload gambar
-Contoh Request GeoJSON
-bash
-curl -X GET "http://localhost:3000/api/reports/geojson"
-Response:
 
+Contoh Request GeoJSON:
+curl -X GET "http://localhost:3000/api/reports/geojson"
+
+Response:
 json
 {
   "type": "FeatureCollection",
@@ -263,24 +258,4 @@ json
     }
   ]
 }
-🤝 Berkontribusi
-Kami menyambut kontribusi dari komunitas! Berikut cara berkontribusi:
 
-Fork project ini
-
-Buat feature branch (git checkout -b feature/AmazingFeature)
-
-Commit perubahan (git commit -m 'Add some AmazingFeature')
-
-Push ke branch (git push origin feature/AmazingFeature)
-
-Buat Pull Request
-
-Development Guidelines
-Ikuti Flutter Style Guide
-
-Gunakan Conventional Commits
-
-Tulis test untuk fitur baru
-
-Update dokumentasi yang relevan
