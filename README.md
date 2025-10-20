@@ -4,8 +4,8 @@
 [![Firebase](https://img.shields.io/badge/Firebase-Cloud_Platform-orange?logo=firebase)](https://firebase.google.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-20.11.1-green?logo=node.js)](https://nodejs.org/)
 [![QGIS](https://img.shields.io/badge/QGIS-3.34-green?logo=qgis)](https://qgis.org/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/your-profile/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-green?style=flat)](https://www.linkedin.com/in/dareean-ahmad-raffi-mardin-72247a229/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/dareean-ahmad-raffi-mardin-72247a229/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-green?style=flat)](-)
 
 **Sorot** adalah sistem terintegrasi yang menghubungkan masyarakat dengan instansi pemerintah untuk pelaporan dan pemantauan masalah lingkungan secara real-time berbasis peta digital.
 
