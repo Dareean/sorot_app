@@ -1,4 +1,4 @@
-# 🎯 Sorot - Platform Pelaporan Lingkungan Berbasis Geospasial
+# Sorot - Platform Pelaporan Lingkungan Berbasis Geospasial
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.19.5-blue?logo=flutter)](https://flutter.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-Cloud_Platform-orange?logo=firebase)](https://firebase.google.com/)
@@ -9,7 +9,7 @@
 
 **Sorot** adalah sistem terintegrasi yang menghubungkan masyarakat dengan instansi pemerintah untuk pelaporan dan pemantauan masalah lingkungan secara real-time berbasis peta digital.
 
-## 📋 Daftar Isi
+## Daftar Isi
 
 - [Fitur Utama](#-fitur-utama)
 - [Arsitektur Sistem](#-arsitektur-sistem)
@@ -21,151 +21,108 @@
 - [Struktur Project](#-struktur-project)
 - [API Documentation](#-api-documentation)
 
-## 🚀 Fitur Utama
+## Fitur Utama
 
-### 📱 Untuk Masyarakat (Aplikasi Mobile)
-- ✅ **Autentikasi Aman** - Login/register dengan Firebase Auth
-- 📝 **Formulir Pelaporan Intuitif** - Lengkap dengan kategori, deskripsi, dan foto
-- 📍 **Deteksi Lokasi Otomatis** - GPS terintegrasi untuk akurasi koordinat
-- 🔔 **Notifikasi Real-time** - Update status laporan langsung ke smartphone
-- 📊 **Dashboard Pelapor** - Lacak status laporan (Pending, Diproses, Selesai)
+### Untuk Masyarakat (Aplikasi Mobile)
+- **Autentikasi Aman** - Login/register dengan Firebase Auth
+- **Formulir Pelaporan Intuitif** - Lengkap dengan kategori, deskripsi, dan foto
+- **Deteksi Lokasi Otomatis** - GPS terintegrasi untuk akurasi koordinat
+- **Notifikasi Real-time** - Update status laporan langsung ke smartphone
+- **Dashboard Pelapor** - Lacak status laporan (Pending, Diproses, Selesai)
 
-### 🖥️ Untuk Admin (Dashboard Web & QGIS)
-- 🌐 **Dashboard Web Responsif** - Kelola laporan dalam bentuk tabel
-- 🗺️ **Integrasi QGIS Real-time** - Monitor laporan di peta digital
-- ✅ **Sistem Validasi** - Verifikasi dan update status laporan
-- 💬 **Catatan Admin** - Tambahkan instruksi untuk tim lapangan
-- 📈 **Analisis Geospasial** - Identifikasi pola dan hotspot masalah
+### Untuk Admin (Dashboard Web & QGIS)
+- **Dashboard Web Responsif** - Kelola laporan dalam bentuk tabel
+- **Integrasi QGIS Real-time** - Monitor laporan di peta digital
+- **Sistem Validasi** - Verifikasi dan update status laporan
+- **Catatan Admin** - Tambahkan instruksi untuk tim lapangan
+- **Analisis Geospasial** - Identifikasi pola dan hotspot masalah
 
-## 🏗️ Arsitektur Sistem
+## Teknologi Yang Di Pakai
+### Frontend Mobile:
+    1. Flutter 3.19.5
+    2. Dart 3.3.3
+    3. Provider (State Management)
+    4. Google Maps Flutter
+    5. Image Picker
+### Backend & Database:
+    1. Node.js 20.11.1
+    2. Express.js
+    3. Firebase Firestore
+    4. Firebase Cloud Storage
+    5. Firebase Cloud Messaging
 
-mermaid
-graph TB
-    A [Aplikasi Flutter] --> B [Firebase Firestore]
-    C [Dashboard Web Admin] --> B
-    D [Server Node.js] --> B
-    D --> E [Cloud Storage]
-    F [QGIS Client] --> D
-    B --> G [Firebase Cloud Messaging]
-    G --> A
-    
-    style A fill:#02569B,color:#fff
-    style C fill:#FFA000,color:#fff
-    style D fill:#339933,color:#fff
-    style F fill:#589632,color:#fff
-## 💻 Teknologi
-Frontend Mobile:
+### Admin & GIS:
+    1. React.js (Dashboard Web)
+    2. QGIS 3.34+
+    3. GeoJSON API
 
-Flutter 3.19.5
-
-Dart 3.3.3
-
-Provider (State Management)
-
-Google Maps Flutter
-
-Image Picker
-
-Backend & Database:
-
-Node.js 20.11.1
-
-Express.js
-
-Firebase Firestore
-
-Firebase Cloud Storage
-
-Firebase Cloud Messaging
-
-Admin & GIS:
-
-React.js (Dashboard Web)
-
-QGIS 3.34+
-
-GeoJSON API
-
-##📋 Prerequisites
+## Prerequisites
 Sebelum instalasi, pastikan software berikut terinstal:
 
-Flutter SDK (versi 3.19.5 atau lebih baru)
+    1. Flutter SDK (versi 3.19.5 atau lebih baru)
+    2. Node.js (versi 20.11.1 atau lebih baru)
+    3. Java JDK 11 atau lebih baru
+    4. Android Studio (untuk emulator Android)
+    5. QGIS (hanya untuk admin GIS)
+    6. Akun Firebase
 
-Node.js (versi 20.11.1 atau lebih baru)
+## Instalasi & Setup
+### Clone Repository
+    1. git clone https://github.com/your-organization/sorot.git
+    2. cd sorot
+### Setup Firebase Project:
+    1. Buka Firebase Console
+    2. Buat project baru sorot-app
+### Aktifkan layanan berikut:
+    - Authentication (Email/Password)
+    - Firestore Database
+    - Cloud Storage
+    - Cloud Messaging
+    - Download file konfigurasi google-services.json (Android) dan GoogleService-Info.plist (iOS)
+### Setup Aplikasi Flutter
+    - bash
+    - cd mobile-app
 
-Java JDK 11 atau lebih baru
+### Install dependencies
+    flutter pub get
 
-Android Studio (untuk emulator Android)
+### Place Firebase config files
+    cp path/to/google-services.json android/app/
+    cp path/to/GoogleService-Info.plist ios/Runner/
+### Setup Backend Server
+    bash
+    cd backend-server
 
-QGIS (hanya untuk admin GIS)
+### Install dependencies
+    npm install
+    
+### Environment setup
+    cp .env.example .env
+### Setup Admin Dashboard: 
+    bash
+    cd admin-dashboard
 
-Akun Firebase
+### Install dependencies
+    npm install
 
-## ⚙️ Instalasi & Setup
-1. Clone Repository
-git clone https://github.com/your-organization/sorot.git
-cd sorot
-2. Setup Firebase Project:
-Buka Firebase Console
-
-Buat project baru sorot-app
-
-Aktifkan layanan berikut:
-
-Authentication (Email/Password)
-
-Firestore Database
-
-Cloud Storage
-
-Cloud Messaging
-
-Download file konfigurasi google-services.json (Android) dan GoogleService-Info.plist (iOS)
-
-3. Setup Aplikasi Flutter
-bash
-cd mobile-app
-
-# Install dependencies
-flutter pub get
-
-# Place Firebase config files
-cp path/to/google-services.json android/app/
-cp path/to/GoogleService-Info.plist ios/Runner/
-4. Setup Backend Server
-bash
-cd backend-server
-
-# Install dependencies
-npm install
-
-# Environment setup
-cp .env.example .env
-5. Setup Admin Dashboard
-bash
-cd admin-dashboard
-
-# Install dependencies
-npm install
-
-# Environment setup
-cp .env.example .env
-🔧 Konfigurasi
+### Environment setup
+    cp .env.example .env
+### Konfigurasi:
 Environment Variables
-Backend Server (.env):
 
-env
-FIREBASE_SERVICE_ACCOUNT=path/to/serviceAccountKey.json
-FIREBASE_STORAGE_BUCKET=sorot-app.appspot.com
-PORT=3000
-NODE_ENV=development
-Admin Dashboard (.env):
+### Backend Server (.env):
+    env
+    FIREBASE_SERVICE_ACCOUNT=path/to/serviceAccountKey.json
+    FIREBASE_STORAGE_BUCKET=sorot-app.appspot.com
+    PORT=3000
+    NODE_ENV=development
+    Admin Dashboard (.env):
 
-env
-REACT_APP_API_URL=http://localhost:3000
-REACT_APP_FIREBASE_CONFIG={"apiKey": "...", ...}
-Konfigurasi QGIS
-Buka QGIS
+    env
+    REACT_APP_API_URL=http://localhost:3000
+    REACT_APP_FIREBASE_CONFIG={"apiKey": "...", ...}
+    Konfigurasi QGIS
+    Buka QGIS
 
 Tambahkan layer baru: Layer > Add Layer > Add GeoJSON Layer
 
@@ -173,33 +130,24 @@ Masukkan URL endpoint: http://localhost:3000/api/reports/geojson
 
 Set refresh interval: Layer Properties > Temporal > Enable Temporal
 
-## 🎯 Cara Menjalankan
+## Cara Menjalankan
 Development Mode
-1. Jalankan Backend Server:
-cd backend-server
-npm run dev
+### Jalankan Backend Server:
+    cd backend-server
+    npm run dev
+### Jalankan Aplikasi Flutter:
+    cd mobile-app
+    flutter run
+### Jalankan Admin Dashboard:
+    cd admin-dashboard
+    npm start
+    Production Build
+### Build Aplikasi Flutter:
+    cd mobile-app
+    flutter build apk --release
+    flutter build ios --release
 
-2. Jalankan Aplikasi Flutter:
-cd mobile-app
-flutter run
-
-3. Jalankan Admin Dashboard:
-cd admin-dashboard
-npm start
-Production Build
-
-4. Build Aplikasi Flutter:
-cd mobile-app
-flutter build apk --release
-flutter build ios --release
-
-5. Build Backend untuk Production:
-cd backend-server
-npm run build
-npm start
-        "photoUrl": "https://..."
-      }
-    }
-  ]
-}
-
+### Build Backend untuk Production:
+    cd backend-server
+    npm run build
+    npm start
