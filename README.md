@@ -197,62 +197,6 @@ flutter build ios --release
 cd backend-server
 npm run build
 npm start
-
-## 📁 Struktur Project
-text
-sorot/
-├── 📱 mobile-app/                 # Aplikasi Flutter
-│   ├── lib/
-│   │   ├── models/               # Data models
-│   │   ├── providers/            # State management
-│   │   ├── screens/              # UI screens
-│   │   ├── services/             # API services
-│   │   └── widgets/              # Reusable widgets
-│   ├── android/ & ios/           # Platform-specific code
-│   └── pubspec.yaml             # Dependencies
-├── 🖥️ backend-server/             # Node.js API Server
-│   ├── src/
-│   │   ├── controllers/          # Route controllers
-│   │   ├── models/               # Database models
-│   │   ├── routes/               # API routes
-│   │   └── middleware/           # Custom middleware
-│   ├── uploads/                  # File upload directory
-│   └── package.json
-├── 🌐 admin-dashboard/            # React Admin Dashboard
-│   ├── src/
-│   │   ├── components/           # React components
-│   │   ├── pages/                # Page components
-│   │   └── services/             # API calls
-│   └── package.json
-└── 📚 documentation/             # Dokumentasi tambahan
-
-## 📡 API Documentation
-Endpoints Utama
-Method	Endpoint	Deskripsi
-GET	/api/reports	Ambil semua laporan
-GET	/api/reports/geojson	Data laporan format GeoJSON
-POST	/api/reports	Buat laporan baru
-PUT	/api/reports/:id	Update status laporan
-POST	/api/upload	Upload gambar
-
-Contoh Request GeoJSON:
-curl -X GET "http://localhost:3000/api/reports/geojson"
-
-Response:
-json
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [106.8272, -6.1754]
-      },
-      "properties": {
-        "id": "report_001",
-        "title": "Sampah Menumpuk",
-        "status": "pending",
         "photoUrl": "https://..."
       }
     }
