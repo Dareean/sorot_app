@@ -12,14 +12,12 @@
 ## Daftar Isi
 
 - [Fitur Utama](#-fitur-utama)
-- [Arsitektur Sistem](#-arsitektur-sistem)
 - [Teknologi](#-teknologi)
 - [Prerequisites](#-prerequisites)
 - [Instalasi & Setup](#-instalasi--setup)
 - [Konfigurasi](#-konfigurasi)
 - [Cara Menjalankan](#-cara-menjalankan)
-- [Struktur Project](#-struktur-project)
-- [API Documentation](#-api-documentation)
+
 
 ## Fitur Utama
 
